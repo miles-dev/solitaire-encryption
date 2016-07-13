@@ -37,9 +37,9 @@ Decryption Steps:
 
 How to run this program:
 -
-There are two ways to run this program:
-1. Check out the code and import it into an IDE (such as Eclipse). From there you can run the Execute.java file to interact with the Command Line Interface within your IDE.
-2. Check out the code and build it into a runnable jar with Execute.java as the main class. From there you can run the jar in an environment of your choice and interact with the same Command Line Interface.
+There are two ways to run this program:  
+1. Check out the code and import it into an IDE (such as Eclipse). From there you can run the Execute.java file to interact with the Command Line Interface within your IDE.  
+2. Check out the code and build it into a runnable jar with Execute.java as the main class. From there you can run the jar in an environment of your choice and interact with the same Command Line Interface.  
 
 Command Line Interface (CLI) Options:
 -
