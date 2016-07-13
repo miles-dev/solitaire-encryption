@@ -15,7 +15,7 @@ public class Execute
 		//runner.createRandomDeck();
 		
 		// Create the key to be used for encryption/decryption.
-		runner.createkey();
+		runner.createKey();
 		
 		System.out.println("original  phrase:  " + runner.getOfficial());
 		String encrypted = (runner.encrypt());

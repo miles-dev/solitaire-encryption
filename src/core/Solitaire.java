@@ -84,7 +84,7 @@ public class Solitaire
 	 * Executes the move set for the Solitaire Encryption Algorithm to populate the 'key' object.
 	 * At the end of running this array, the key will be completely produced at the necessary length to complet encryption/decryption.
 	 */
-	public void createkey()
+	public void createKey()
 	{
 		for (int i = 0; i < input.length(); i++)
 		{
@@ -169,5 +169,22 @@ public class Solitaire
 	public String getOfficial() 
 	{
 		return input;
+	}
+	
+	/**
+	 * ONLY TO BE USED FOR TESTING. REMOVE DURING EXECUTION.
+	 * @return the current key
+	 */
+	public List<Integer> getKey()
+	{
+		return key;
+	}
+
+	/**
+	 * ONLY TO BE USED FOR TESTING. REMOVE DURING EXECUTION.
+	 * @return the current Deck
+	 */
+	public Deck getDeck() {
+		return deck;
 	}
 }

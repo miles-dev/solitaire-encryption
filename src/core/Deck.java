@@ -192,4 +192,26 @@ public class Deck
 		
 		setCards(newDeck);
 	}
+
+	/**
+	 * Primarily for testing. Returns a String[] of all of the cards in the Deck in current order.
+	 * @return String[] of the cards in the current Deck.
+	 */
+	public String[] toStringArray() {
+		String[] currentCards = new String[54];
+		Card cur;
+		for (int i = 0; i < cards.size(); i++)
+		{
+			cur = cards.get(i);
+			if (cur.getVal() == 53)
+			{
+				currentCards[i] = cur.getSuit();
+			}
+			else
+			{
+				currentCards[i] = cur.getSuit() + ((cur.getVal() -1) % 13);
+			}
+		}
+		return currentCards;
+	}
 }
