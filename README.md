@@ -7,7 +7,7 @@ A default Deck of Cards when in order will be: A-K, CDaHbS; a = JokerA, b = Joke
 * C (Clubs): 1-13
 * D (Diamonds): 14-26
 * H (Hearts): 27-39
-* S (Spades): 39-52
+* S (Spades): 40-52
 * Jokers: 53
 * Each letter has a value given its position in the alphabet: A-Z = 1-26 
 
