@@ -12,19 +12,21 @@ public class Execute
 		System.out.print("Enter phrase: ");
 		String input = reader.nextLine();
 		
-		System.out.print("Enter e for encryption, enter d for decryption:");
+		String methodRequest = "Enter e for encryption, enter d for decryption:";
+		System.out.print(methodRequest);
 		String method = reader.next().toLowerCase();
 		while (!method.equals("e") && !method.equals("d"))
 		{
-			System.out.print("Enter e for encryption, enter d for decryption:");
+			System.out.print(methodRequest);
 			method = reader.next();
 		}
 		
-		System.out.print("Enter o for an ordered deck, enter r for a random deck, enter s to specify your own deck:");
+		String deckOrderRequest = "Enter o for an ordered deck, enter r for a random deck, enter s to specify your own deck:";
+		System.out.print(deckOrderRequest);
 		String deckOrder = reader.next().toLowerCase();
 		while (!deckOrder.equals("o") && !deckOrder.equals("r") && !deckOrder.equals("s"))
 		{
-			System.out.print("Enter o for an ordered deck, enter r for a random deck, enter s to specify your own deck:");
+			System.out.print(deckOrderRequest);
 			deckOrder = reader.next();
 		}
 		
@@ -36,14 +38,14 @@ public class Execute
 				specifiedDeck = reader.nextLine();
 			}
 		
-		System.out.println("Input:" + input);
+		System.out.println("phrase:" + input);
 		System.out.println("Encrypt/Decrypt:" + method);
 		System.out.println("Deck Order:" + deckOrder);
 		reader.close();
 		
 		Solitaire runner = new Solitaire(input);
 
-		// Decide if you want to use an ordered or random deck. This is mostly for testing.
+		// Decide if you want to use an ordered, random, or a specified deck.
 		List<Card> generatedDeck = null;
 		if (deckOrder.equals("o"))
 			runner.createOrderedDeck();
@@ -56,7 +58,6 @@ public class Execute
 			runner.createSpecifiedOrderedDeck(specifiedDeck);
 		
 		runner.createKey();
-		System.out.println("key:" + runner.getKey());
 		String output;
 		if (method.equals("e"))
 			output = (runner.encrypt());

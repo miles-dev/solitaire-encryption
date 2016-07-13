@@ -1,11 +1,12 @@
 package core;
-public class Card
+
+public final class Card
 {
 	// Specifies the suit of the card.
-	private String suit;
+	private final String suit;
 	
 	// Specifies the value of the card (1-53)
-	private int val;
+	private final int val;
 
 	/**
 	 * Create a new Card with the specified suit and val.
@@ -34,22 +35,6 @@ public class Card
 		return val;
 	}
 
-	/**
-	 * Set the suit of the Card to the provided suit.
-	 * @param suit - value to be set as this Cards new suit.
-	 */
-	public void setSuit(String suit) {
-		this.suit = suit;
-	}
-
-	/**
-	 * Set the val of the Card to the provided val.
-	 * @param val - value to be set as this Cards new val.
-	 */
-	public void setVal(int val) {
-		this.val = val;
-	}
-	
 	/**
 	 * @return the toString() representation of the Card. This will be of the form "<suit><val>"
 	 */

@@ -44,7 +44,6 @@ public class Solitaire
 
 	/**
 	 * Create a deck for this instance with the Cards in order.
-	 * This is primarily for testing.
 	 */
 	public void createOrderedDeck()
 	{
@@ -82,19 +81,18 @@ public class Solitaire
 
 	/**
 	 * Executes the move set for the Solitaire Encryption Algorithm to populate the 'key' object.
-	 * At the end of running this array, the key will be completely produced at the necessary length to complet encryption/decryption.
+	 * At the end of running this array, the key will be completely produced at the necessary length to complete encryption/decryption.
 	 */
 	public void createKey()
 	{
-		for (int i = 0; i < input.length(); i++)
+		// Iterate until the key is the same length as the input.
+		while (key.size() != input.length())
 		{
 			deck.moveJoker("JA", 1);
 			deck.moveJoker("JB", 2);
 			deck.tripleCut();
 			deck.countCut();
-			// Confirm we didn't hit a Joker and need to re-start at this position as the key hasn't been updated.
-			if (!countToUpdateKey())
-				i--;
+			countToUpdateKey();
 		}
 	}
 
@@ -105,7 +103,7 @@ public class Solitaire
 	 * 		true: The key has been successfully updated with a new value.
 	 * 		false: We hit a joker and no update has been pushed to the key. 
 	 */
-	private boolean countToUpdateKey()
+	private void countToUpdateKey()
 	{
 		// Need to have the '- 1' as the cards have a value of 1-53 and the deck is zero indexed. 
 		int count = deck.get(0).getVal() - 1;
@@ -113,7 +111,8 @@ public class Solitaire
 
 		//TODO: Check if the key must be %26 for this math to work and not turn 'A' into '[' during decryption.
 		// If we get back a Joker, val == 53, we don't want to add it to the key and we want to return false.
-		return (val != 53) && key.add(val % 26);
+		if (val != 53)
+			key.add(val % 26);
 	}
 
 	/**
@@ -172,16 +171,6 @@ public class Solitaire
 	}
 	
 	/**
-	 * ONLY TO BE USED FOR TESTING. REMOVE DURING EXECUTION.
-	 * @return the current key
-	 */
-	public List<Integer> getKey()
-	{
-		return key;
-	}
-
-	/**
-	 * ONLY TO BE USED FOR TESTING. REMOVE DURING EXECUTION.
 	 * @return the current Deck
 	 */
 	public Deck getDeck() {

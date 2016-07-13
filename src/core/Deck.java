@@ -52,32 +52,6 @@ public class Deck
 	}
 
 	/**
-	 * Removes a Card from a specific position within this Deck.
-	 * @param pos - Position of the Card which should be removed.
-	 */
-	private void remove(int pos) 
-	{
-		cards.remove(pos);
-	}
-
-	/**
-	 * Adds a new Card to a specific position within this Deck.
-	 * @param pos - Position where the new Card should go.
-	 * @param card - New Card to be added.
-	 */
-	private void add(int pos, Card card) {
-		cards.add(pos, card);
-	}
-	
-	/**
-	 * Removes all of the Cards from this Deck.
-	 */
-	private void clear() 
-	{
-		cards.clear();
-	}
-
-	/**
 	 * @return the list of Cards for this Deck.
 	 */
 	public List<Card> getCards() {
@@ -90,13 +64,6 @@ public class Deck
 	 */
 	private void setCards(List<Card> list) {
 		this.cards = list;
-	}
-
-	/**
-	 * @return the number of Cards stored in this.cards.
-	 */
-	private int size() {
-		return cards.size();
 	}
 
 	/**
@@ -222,7 +189,7 @@ public class Deck
 	}
 
 	/**
-	 * Primarily for testing. Returns a String[] of all of the cards in the Deck in current order.
+	 * Returns a String[] of all of the cards in the Deck in current order.
 	 * @return String[] of the cards in the current Deck.
 	 */
 	public String[] toStringArray() {

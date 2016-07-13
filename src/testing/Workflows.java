@@ -1,6 +1,8 @@
 package testing;
 
 import static org.junit.Assert.*;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -15,14 +17,27 @@ public class Workflows
 		Solitaire s = new Solitaire("TEST");
 		s.createOrderedDeck();
 		s.createKey();
-		//TODO: This is based off of the code already. verify this manually.
+
 		// Expect the key from an ordered Deck with a phrase of length 4 to be: 1, 17, 9, 22
 		List<Integer> expectedKey = new ArrayList<Integer>();
 		expectedKey.add(1);
 		expectedKey.add(17);
 		expectedKey.add(9);
 		expectedKey.add(22);
-		assertArrayEquals("Key matches orderedDeck key", s.getKey().toArray(), expectedKey.toArray());
+		
+		Field f = null;
+		List<Integer> createdKey = null;
+		try {
+			f = s.getClass().getDeclaredField("key");
+			f.setAccessible(true);
+			createdKey = (List<Integer>) f.get(s);
+		} catch (Exception e) {
+			// Not worrying about various exceptions given this is a Unit Test.
+			e.printStackTrace();
+		}
+		
+		
+		assertArrayEquals("Key matches orderedDeck key", createdKey.toArray(), expectedKey.toArray());
 	}
 	
 	@Test
@@ -42,7 +57,6 @@ public class Workflows
 	@Test
 	public void decryptTest() 
 	{
-		//TODO This is based off of the code already. verify this manually.
 		Solitaire s = new Solitaire("UVBP");
 		s.createOrderedDeck();
 		s.createKey();
@@ -60,7 +74,6 @@ public class Workflows
 	@Test
 	public void encryptTest() 
 	{
-		//TODO This is based off of the code already. verify this manually.
 		Solitaire s = new Solitaire("TEST");
 		s.createOrderedDeck();
 		s.createKey();
