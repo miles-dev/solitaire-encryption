@@ -72,12 +72,12 @@ public class Solitaire
 	}
 	
 	/**
-	 * Create a new Deck with the cards in the specified order as provided in the passed in String[].
-	 * @param specifiedOrder - String[] representing the order wanted for the cards.
+	 * Create a new Deck with the cards in the specified order as provided in the passed in String.
+	 * @param specifiedDeck - String representing the order wanted for the cards.
 	 */
-	public void createSpecifiedOrderedDeck(String[] specifiedOrder)
+	public void createSpecifiedOrderedDeck(String specifiedDeck)
 	{
-		deck.createDeck(specifiedOrder);
+		deck.createDeck(specifiedDeck);
 	}
 
 	/**

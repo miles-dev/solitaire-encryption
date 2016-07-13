@@ -6,19 +6,26 @@ import java.util.Map;
 
 public class Deck 
 {
-	private List<Card> cards = new ArrayList<Card>(); // the deck of cards
+	/*TODO A potential refactor here would be to use a LinkedList instead of ArrayList. 
+	 * That change would allow for the move and cut methods to be done with pointer logic
+	 * rather than rearranging the lists. Given the size of the lists, and that they can
+	 * never grow beyond 54, it isn't worth it right now. Could be interesting to experiment
+	 * with later on. 
+	 */
+	// the deck of cards
+	private List<Card> cards = new ArrayList<Card>(); 
 	private Map<String, Card> valueToCardMap = new HashMap<String, Card>() 
 	{{
 		for (int i = 0; i < 54; i++)
 		{
 			if (i < 13)
-				put("C" + i, new Card("C", i+1));
+				put("C" + i, new Card("C", i+1)); // C1-13
 			else if (i < 26)
-				put("D" + (i - 13), new Card("D", i+1));
+				put("D" + (i - 13), new Card("D", i+1)); // D14-26
 			else if (i < 39)
-				put("H" + (i - 26), new Card("H", i+1));
+				put("H" + (i - 26), new Card("H", i+1)); // H27-39
 			else if (i < 52)
-				put("S" + (i - 39), new Card("S", i+1));
+				put("S" + (i - 39), new Card("S", i+1)); // S40-52
 			else if (i == 52)
 				put("JA", new Card("JA", 53));
 			else if (i == 53)
@@ -73,7 +80,7 @@ public class Deck
 	/**
 	 * @return the list of Cards for this Deck.
 	 */
-	private List<Card> getCards() {
+	public List<Card> getCards() {
 		return cards;
 	}
 
@@ -102,15 +109,36 @@ public class Deck
 	}
 	
 	/**
-	 * Given a String[] representing the order of the cards, fill in this.cards with the appropriate Card objects.
-	 * @param givenDeck - String[] representing the order of the cards. Each String matches up with a key from the
-	 * 	valueToCardMap.
+	 * Given a String representing the order of the cards, fill in this.cards with the appropriate Card objects.
+	 * @param specifiedDeck - String of comma separated values showing the order of the cards. 
+	 * precondition: specifiedDeck is of the form: [C1,...,JA53,...,D16,...,JB53,...,S50]
+	 * 		Each value matches up with a key from the valueToCardMap.
+	 * 		Not required, but it is expected that specifiedDeck will originate from the output of running in
+	 * 			encrypt mode with a random deck previously.
 	 */
-	public void createDeck(String[] givenDeck)
+	public void createDeck(String specifiedDeck)
 	{
-		for (int i = 0; i < givenDeck.length; i++)
+		specifiedDeck = specifiedDeck.replaceAll("[^A-Z0-9,]", "");
+		String[] splitSpecifiedDeck = specifiedDeck.split(",");
+		for (int i = 0; i < splitSpecifiedDeck.length; i++)
 		{
-			cards.add(valueToCardMap.get(givenDeck[i]));
+			char suit = splitSpecifiedDeck[i].charAt(0);
+			if (suit == 'J')
+				cards.add(valueToCardMap.get(splitSpecifiedDeck[i].substring(0,2)));
+			else
+				cards.add(valueToCardMap.get(suit + "" + ((Integer.parseInt(splitSpecifiedDeck[i].substring(1)) - 1) % 13)));
+		}
+	}
+	
+	/**
+	 * Given a String[] representing the order of the cards, fill in this.cards with the appropriate Card objects.
+	 * @param specifiedDeck - String[] with values showing the order of the cards. 
+	 */
+	public void createDeck(String[] specifiedDeck)
+	{
+		for (int i = 0; i < specifiedDeck.length; i++)
+		{
+			cards.add(valueToCardMap.get(specifiedDeck[i]));
 		}
 	}
 	
@@ -123,17 +151,19 @@ public class Deck
 	public void moveJoker(String type, int posShift)
 	{
 		int curJokerPos = 0;
-		for (int findJokerPos = 0; findJokerPos < 54; findJokerPos++)
+		for (; curJokerPos < 54; curJokerPos++)
 		{
-			if (cards.get(findJokerPos).getSuit().equals(type))
-			{
-				curJokerPos = findJokerPos;
+			if (cards.get(curJokerPos).getSuit().equals(type))
 				break;
-			}
 		}
 		Card holdJoker = cards.get(curJokerPos);
 		cards.remove(curJokerPos);
-		cards.add((curJokerPos+posShift) % 54, holdJoker);
+		
+		// The Joker can never become the first card as you must consider the cards to actually be in a cycle and not a list.
+		if (((curJokerPos+posShift) % 54) == 0)
+			cards.add(1,holdJoker);
+		else
+			cards.add((curJokerPos+posShift) % 54, holdJoker);
 	}
 
 	/**
@@ -177,8 +207,6 @@ public class Deck
 		
 		// Need to have the '- 1' as the cards have a value of 1-53 and the deck is zero indexed.
 		int cutPos = cards.get(cards.size() - 1).getVal() - 1;
-		if (cutPos == 0)
-			System.out.println("hi");
 		
 		for (int i = (cutPos + 1) % 54; (i %= 54) != cutPos; i++) 
 		{

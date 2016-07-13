@@ -16,12 +16,12 @@ public class Workflows
 		s.createOrderedDeck();
 		s.createKey();
 		//TODO: This is based off of the code already. verify this manually.
-		// Expect the key from an ordered Deck with a phrase of length 4 to be: 1, 14, 5, 23
+		// Expect the key from an ordered Deck with a phrase of length 4 to be: 1, 17, 9, 22
 		List<Integer> expectedKey = new ArrayList<Integer>();
 		expectedKey.add(1);
-		expectedKey.add(14);
-		expectedKey.add(5);
-		expectedKey.add(23);
+		expectedKey.add(17);
+		expectedKey.add(9);
+		expectedKey.add(22);
 		assertArrayEquals("Key matches orderedDeck key", s.getKey().toArray(), expectedKey.toArray());
 	}
 	
@@ -43,11 +43,18 @@ public class Workflows
 	public void decryptTest() 
 	{
 		//TODO This is based off of the code already. verify this manually.
-		Solitaire s = new Solitaire("USXQ");
+		Solitaire s = new Solitaire("UVBP");
 		s.createOrderedDeck();
 		s.createKey();
 		String decrypted = s.decrypt(s.getOfficial());
 		assertEquals("Decrypted with ordered deck", decrypted, "TEST");
+		
+		// Including this test case to catch the edges of the alphabet.
+		s = new Solitaire("BSLZVTE");
+		s.createOrderedDeck();
+		s.createKey();
+		decrypted = s.decrypt(s.getOfficial());
+		assertEquals("Decrypted with ordered deck, edge letters", decrypted, "ABCDXYZ");
 	}
 	
 	@Test
@@ -58,7 +65,14 @@ public class Workflows
 		s.createOrderedDeck();
 		s.createKey();
 		String encrypted = s.encrypt();
-		assertEquals("Encryption with ordered deck", encrypted, "USXQ");
+		assertEquals("Encryption with ordered deck", encrypted, "UVBP");
+		
+		// Including this test case to catch the edges of the alphabet.
+		s = new Solitaire("ABCDXYZ");
+		s.createOrderedDeck();
+		s.createKey();
+		encrypted = s.encrypt();
+		assertEquals("Encryption with ordered deck, edge letters", encrypted, "BSLZVTE");
 	}
 	
 	@Test
