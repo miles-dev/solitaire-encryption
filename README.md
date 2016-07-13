@@ -16,7 +16,7 @@ The steps of the algorithm in question are:
 1. Move Joker A down 1 card.
 2. Move Joker B down 2 cards.
 3. Triple cut: switch the cards before the 1st joker with those after the 2nd joker.
-4. Count Cut: look at the bottom card, count down from the top of the deck that many cards. Cut after the card you counted too. Keep the bottom card the same.
+4. Count Cut: look at the bottom card, count down from the top of the deck that many cards. Cut after the card you counted to. Keep the bottom card the same.
 5. Look at the top card, and count down that many cards from the top. If you hit a joker, start with step 1 again. Otherwise, that is the newest value for the Key.
 6. Append that value to the Key and restart from step 1 for as many times as needed.
 The end goal will be to have a Key with the same number of values as the length of the input phrase.
