@@ -14,7 +14,7 @@ public class Deck
 	 */
 	// the deck of cards
 	private List<Card> cards = new ArrayList<Card>(); 
-	private Map<String, Card> valueToCardMap = new HashMap<String, Card>() 
+	private final Map<String, Card> valueToCardMap = new HashMap<String, Card>() 
 	{{
 		for (int i = 0; i < 54; i++)
 		{

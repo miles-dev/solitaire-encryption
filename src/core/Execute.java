@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 public class Execute 
 {
+	/**
+	 * Main runner to kick off the CLI prompts.
+	 * @param args - Unused at this time.
+	 */
 	public static void main(String[] args)
 	{
 		// Get input from the user:
