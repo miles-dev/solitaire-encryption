@@ -45,8 +45,9 @@ public class Execute
 			runner.createRandomDeck();
 			generatedDeck = runner.getDeck().getCards();
 		}
-		else //TODO: Bug exists somewhere in this workflow. Need to track down.
+		else
 			runner.createSpecifiedOrderedDeck(specifiedDeck);
+			
 		
 		runner.createKey();
 		String output;
@@ -64,7 +65,7 @@ public class Execute
 			officialOutput += output.charAt(i);
 		}
 		System.out.println("Output:  " + officialOutput);
-		if (deckOrder.equals("r"))
+		if (deckOrder.equals("R"))
 			System.out.println("Generated Deck Order was:\n" + generatedDeck);
 	}
 	

@@ -52,10 +52,13 @@ public class Deck
 	}
 
 	/**
-	 * @return the list of Cards for this Deck.
+	 * @return immutable copy of list of Cards for this Deck. Needs to be immutable copy so that the 
+	 * original ordering can be stored. 
 	 */
 	public List<Card> getCards() {
-		return cards;
+		final List<Card> returnCards = new ArrayList<Card>();
+		returnCards.addAll(cards);
+		return returnCards;
 	}
 
 	/**
