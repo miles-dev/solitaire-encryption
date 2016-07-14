@@ -13,9 +13,9 @@ public class Solitaire
 	// Input provided from the user which is to be encrypted/decrypted
 	private String input;
 	
-	// TODO: Determine if there is a cleaner way to input deck order
+	// TODO: Potential place to clean up would be to find another solution than this for the ordered deck workflow
 	// input for an ordered deck here:
-	private String[] deckOrder = {"C0","C1","C2","C3","C4","C5","C6","C7","C8","C9","C10","C11","C12",
+	private final String[] deckOrder = {"C0","C1","C2","C3","C4","C5","C6","C7","C8","C9","C10","C11","C12",
 								  "D0","D1","D2","D3","D4","D5","D6","D7","D8","D9","D10","D11","D12","JA",
 								  "H0","H1","H2","H3","H4","H5","H6","H7","H8","H9","H10","H11","H12","JB",
 								  "S0","S1","S2","S3","S4","S5","S6","S7","S8","S9","S10","S11","S12"};
@@ -109,7 +109,7 @@ public class Solitaire
 		int count = deck.get(0).getVal() - 1;
 		int val = (deck.get(count)).getVal();
 
-		//TODO: Check if the key must be %26 for this math to work and not turn 'A' into '[' during decryption.
+		//TODO: Possible improvement to determine if the key must be %26 for the math to work and not turn 'A' into '[' during decryption.
 		// If we get back a Joker, val == 53, we don't want to add it to the key and we want to return false.
 		if (val != 53)
 			key.add(val % 26);

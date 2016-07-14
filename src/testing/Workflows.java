@@ -1,7 +1,6 @@
 package testing;
 
 import static org.junit.Assert.*;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,7 @@ public class Workflows
 				  "S0","S1","S2","S3","S4","S5","S6","S7","S8","S9","S10","S11","S12"}; 
 		assertArrayEquals("Matching Ordered Decks", s.getDeck().toStringArray(), expectedDeck);
 		
-		//TODO: Add additional testing on createRandomDeck() and createSpecifiedOrderDeck(String[])
+		//TODO: Add additional testing on createRandomDeck and createSpecifiedOrderDeck workflows.
 	}
 	
 	@Test
